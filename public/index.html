@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Case App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+  <!-- ==== TOP BALANCE BAR ==== -->
+  <header class="topbar">
+    <div class="currency" data-cur="silver">
+      <img src="assets/silver.png" alt="" class="currency__icon" />
+      <span class="currency__amount" id="bal-silver">0</span>
+    </div>
+    <div class="currency" data-cur="gold">
+      <img src="assets/gold.png" alt="" class="currency__icon" />
+      <span class="currency__amount" id="bal-gold">0</span>
+    </div>
+    <div class="currency" data-cur="chrome">
+      <img src="assets/chrome.png" alt="" class="currency__icon" />
+      <span class="currency__amount currency__amount--chrome" id="bal-chrome">0</span>
+    </div>
+  </header>
+
+  <!-- ==== MAIN SCREEN ==== -->
+  <main class="screen" id="screen-home">
+    <div class="home-placeholder">
+      <p>Открывай контейнеры и собирай валюту</p>
+    </div>
+  </main>
+
+  <!-- ==== VALUTA SECTION (список контейнеров) ==== -->
+  <section class="screen screen--hidden" id="screen-valuta">
+    <div class="valuta-layout">
+      <div class="container-card" id="container-l-card">
+        <button class="info-btn" id="info-btn" aria-label="Информация о контейнере">i</button>
+        <img class="container-card__img" src="assets/container_l.png" alt="Контейнер L" />
+        <div class="container-card__name">Контейнер L</div>
+        <button class="container-card__action container-card__action--free" id="open-btn">
+          Бесплатно
+        </button>
+      </div>
+
+      <div class="container-col" id="container-col">
+        <div class="container-card container-card--locked">
+          <div class="container-card__name container-card__name--muted">Скоро</div>
+        </div>
+        <div class="container-card container-card--locked">
+          <div class="container-card__name container-card__name--muted">Скоро</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==== CASES BUTTON + SUBMENU ==== -->
+  <div class="cases-dock">
+    <div class="cases-submenu" id="cases-submenu">
+      <button class="cases-submenu__item" data-target="valuta">Валюта</button>
+      <button class="cases-submenu__item" data-target="music" disabled>Музыка</button>
+      <button class="cases-submenu__item" data-target="items" disabled>Предметы</button>
+    </div>
+    <button class="cases-btn" id="cases-btn">Кейсы</button>
+  </div>
+
+  <!-- ==== INFO MODAL ==== -->
+  <div class="modal-overlay" id="info-modal">
+    <div class="modal">
+      <div class="modal__title">Контейнер L — что внутри</div>
+      <div class="drop-table" id="drop-table"><!-- заполняется в JS --></div>
+      <div class="modal__divider"></div>
+      <div class="modal__special-title">Особенное</div>
+      <p class="modal__special-text">
+        После открытия крутите колесо 50/50! В случае победы забираете 2× награды,
+        в случае поражения ваш выигрыш сгорает.
+      </p>
+      <button class="btn btn--ghost" id="info-close">Понятно</button>
+    </div>
+  </div>
+
+  <!-- ==== REVEAL MODAL (после открытия) ==== -->
+  <div class="modal-overlay" id="reveal-modal">
+    <div class="modal modal--reveal">
+      <div class="modal__title">Вы получили</div>
+      <div class="reveal-grid" id="reveal-grid"><!-- заполняется в JS --></div>
+      <div class="reveal-actions">
+        <button class="btn btn--red" id="btn-gamble">Крутить колесо</button>
+        <button class="btn btn--green" id="btn-claim">Забрать выигрыш</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==== WHEEL MODAL (гэмбл 50/50) ==== -->
+  <div class="modal-overlay" id="wheel-modal">
+    <div class="modal modal--wheel">
+      <div class="modal__title" id="wheel-title">Испытай удачу</div>
+      <div class="wheel-wrap">
+        <div class="wheel" id="wheel">
+          <div class="wheel__half wheel__half--green"></div>
+          <div class="wheel__half wheel__half--red"></div>
+        </div>
+        <div class="wheel__pointer"></div>
+      </div>
+      <div class="wheel-actions" id="wheel-actions-pre">
+        <button class="btn btn--red" id="btn-wheel-leave">Выйти и оставить</button>
+        <button class="btn btn--green" id="btn-wheel-spin">Крутить</button>
+      </div>
+      <div class="wheel-actions wheel-actions--hidden" id="wheel-actions-post">
+        <button class="btn btn--green" id="btn-wheel-claim">Забрать x2</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
